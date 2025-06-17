@@ -17,10 +17,14 @@
 
     - block:
       - name: run openscap
-        command: oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_server_l1 --results ~/OpenScap_results_file.xml /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+        command: oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_server_l1 --results /tmp/OpenScap_results_file.xml /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+        ignore_errors: yes
+
+      - name: generate report
+        command: oscap xccdf generate report --output /tmp/OpenScap_results_file.html /tmp/OpenScap_results_file.xml
 
       - name: download report
         fetch:
-          src: /tmp/oscap-report.html
+          src: /tmp/OpenScap_results_file.html
           dest: ../oscap-reports/{{ inventory_hostname }}.html
           flat: yes
