@@ -25,9 +25,8 @@
       - name: run openscap
         command: oscap xccdf eval --profile {{ oscap_profile }} --results-arf /tmp/oscap-arf.xml --report /tmp/oscap-report.html --fetch-remote-resources /usr/share/xml/scap/ssg/content/{{ oscap_policy }}.xml
 
-        always:
-        - name: download report
-          fetch:
-            src: /tmp/oscap-report.html
-            dest: ../oscap-reports/{{ inventory_hostname }}.html
-            flat: yes
+      - name: download report
+        fetch:
+          src: /tmp/oscap-report.html
+          dest: ../oscap-reports/{{ inventory_hostname }}.html
+          flat: yes
