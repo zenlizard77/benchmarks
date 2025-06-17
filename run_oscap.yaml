@@ -5,6 +5,7 @@
   vars:
     oscap_profile: xccdf_org.ssgproject.content_profile_cis_server_l1
     oscap_policy: ssg-rhel8-ds
+
   tasks:
     - name: install openscap scanner
       ansible.builtin.package:
@@ -16,7 +17,7 @@
 
     - block:
       - name: run openscap
-        command: oscap xccdf eval --profile {{ oscap_profile }} --results-arf /tmp/oscap-arf.xml --report /tmp/oscap-report.html --fetch-remote-resources /usr/share/xml/scap/ssg/content/{{ oscap_policy }}.xml
+        command: oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_server_l1 --results ~/OpenScap_results_file.xml /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
 
       - name: download report
         fetch:
