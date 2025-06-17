@@ -13,13 +13,6 @@
       with_items:
       - openscap-scanner
       - scap-security-guide  
-        
-
-    - name: Create a new user
-      ansible.builtin.user:
-        name: "{{ user_name }}"
-        state: present
-        create_home: true
 
     - block:
       - name: run openscap
