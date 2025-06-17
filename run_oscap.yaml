@@ -28,3 +28,7 @@
           src: /tmp/OpenScap_results_file.html
           dest: ../oscap-reports/{{ inventory_hostname }}.html
           flat: yes
+
+      - name: display report
+        ansible.builtin.debug:
+          var: lookup('ansible.builtin.file', '../oscap-reports/{{ inventory_hostname }}.html')
